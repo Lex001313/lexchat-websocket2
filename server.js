@@ -82,7 +82,7 @@ function sendToUser(phone, event, data) {
   return false;
 }
 
-// ========== HEALTH CHECK (public 200 OK) ==========
+// ========== HEALTH CHECK ==========
 app.get('/healthz', (req, res) => {
   res.status(200).json({ 
     status: 'ok', 
@@ -97,9 +97,7 @@ app.get('/healthz', (req, res) => {
   });
 });
 
-// ========== STATS (только для администратора) ==========
 app.get('/stats', (req, res) => {
-  // Здесь можно добавить проверку авторизации
   res.json({
     online: onlineUsers.size,
     connections: io.engine.clientsCount,
@@ -364,7 +362,7 @@ io.on('connection', (socket) => {
 server.listen(PORT, () => {
   console.log(`
 ╔═══════════════════════════════════════════════════════════════════════════════╗
-║                    🚀 LexChat WebSocket Server v2.1 (Socket.IO)               ║
+║                    🚀 LexChat WebSocket Server v3.1 (Socket.IO)               ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
 ║  HTTP Server:  http://localhost:${PORT}                                         ║
 ║  Health check: http://localhost:${PORT}/healthz                                 ║
