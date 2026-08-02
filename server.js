@@ -82,7 +82,7 @@ function sendToUser(phone, event, data) {
   return false;
 }
 
-// ========== HEALTH CHECK ==========
+// ========== HEALTH CHECK (public 200 OK) ==========
 app.get('/healthz', (req, res) => {
   res.status(200).json({ 
     status: 'ok', 
@@ -97,7 +97,9 @@ app.get('/healthz', (req, res) => {
   });
 });
 
+// ========== STATS (только для администратора) ==========
 app.get('/stats', (req, res) => {
+  // Здесь можно добавить проверку авторизации
   res.json({
     online: onlineUsers.size,
     connections: io.engine.clientsCount,
